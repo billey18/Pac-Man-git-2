@@ -138,15 +138,18 @@ namespace Pac_Man_6
             {
 
                 downSide();
-                if (mazeGrid.maze[x, y].getValue() == g.getCharacter())
-                {
-                    life -= 1;
-                }
-                else if (mazeGrid.maze[x, y].getValue() == '.')
+               
+                
+                if (mazeGrid.maze[x, y].getValue() == '.')
                 {
                     score += 1;
                 }
               
+              //  if (mazeGrid.maze[x, y].getValue() != ' ' && mazeGrid.maze[x, y].getValue() != '.')
+              //  {
+                   
+                //    life -= 1;
+              //  }
 
             }
 
@@ -168,7 +171,16 @@ namespace Pac_Man_6
         public void printScore()
         {
             Console.SetCursorPosition(80, 5);
-            Console.WriteLine("Score = {0}", score);
+            Console.WriteLine("Score : {0}", score);
+            Console.SetCursorPosition(80, 6);
+            Console.WriteLine("Lives: {0}", life);
+
+            if (score > 464)
+            {
+                Console.SetCursorPosition(80, 10);
+                Console.WriteLine("You win! press [Esc] To Exit.");
+            }
+
         }
         public void movePacMan()
         {

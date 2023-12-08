@@ -43,7 +43,8 @@ namespace Pac_Man_6
         {
             this.ghostDirection = ghostDirection;
         }
-
+       
+        
         public char getCharacter()
         {
             return ghostCharacter;
@@ -85,7 +86,7 @@ namespace Pac_Man_6
             return deltaChange;
         }
 
-
+        
 
         public void setDeltaZero()
         {
