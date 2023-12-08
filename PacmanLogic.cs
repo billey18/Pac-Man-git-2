@@ -63,6 +63,7 @@ namespace Pac_Man_6
 
         public void downSide()
         {
+            removePacMan();
             x += 1;
         }
 
@@ -90,7 +91,7 @@ namespace Pac_Man_6
 
         public void moveRightDirection(Ghost g)
         {
-            if (mazeGrid.maze[x, y - 1].getValue() == ' ' || mazeGrid.maze[x, y - 1].getValue() == '.')
+            if (mazeGrid.maze[x, y + 1].getValue() == ' ' || mazeGrid.maze[x, y + 1].getValue() == '.')
             {
 
                 rightSide();
@@ -136,7 +137,7 @@ namespace Pac_Man_6
             if (mazeGrid.maze[x + 1, y].getValue() == ' ' || mazeGrid.maze[x + 1, y].getValue() == '.')
             {
 
-                upSide();
+                downSide();
                 if (mazeGrid.maze[x, y].getValue() == g.getCharacter())
                 {
                     life -= 1;
@@ -145,9 +146,11 @@ namespace Pac_Man_6
                 {
                     score += 1;
                 }
-
+              
 
             }
+
+
 
         }
 
