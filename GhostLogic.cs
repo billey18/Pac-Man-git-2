@@ -276,13 +276,80 @@ namespace Pac_Man_6
                 distance[0] = calculateDistance(mazeGrid.getLeftSpace(g), mazeGrid.playerLocation());
             }
 
+            if (mazeGrid.getRightSpace(g).getValue() == '.' || mazeGrid.getRightSpace(g).getValue() == ' ' || mazeGrid.getRightSpace(g).getValue() == 'P')
+            {
+                distance[1] = calculateDistance(mazeGrid.getRightSpace(g), mazeGrid.playerLocation());
+            }
+
+            if (mazeGrid.getTopSpace(g).getValue() == '.' || mazeGrid.getTopSpace(g).getValue() == ' ' || mazeGrid.getTopSpace(g).getValue() == 'P')
+            {
+                distance[2] = calculateDistance(mazeGrid.getTopSpace(g), mazeGrid.playerLocation());
+            }
+
+            if (mazeGrid.getDownSpace(g).getValue() == '.' || mazeGrid.getDownSpace(g).getValue() == ' ' || mazeGrid.getDownSpace(g).getValue() == 'P')
+            {
+                distance[3] = calculateDistance(mazeGrid.getLeftSpace(g), mazeGrid.playerLocation());
+            }
 
 
+            if (distance[0] > distance[1] && distance[3] > distance[1] && distance[2] > distance[1])
+            {
+                setDirection("Right");
+                moveHorizontal();
+            }
 
+            if (distance[1] > distance[0] && distance[3] > distance[0] && distance[2] > distance[0])
+            {
+                setDirection("Left");
+                moveHorizontal();
+            }
+
+            if (distance[0] > distance[2] && distance[3] > distance[2] && distance[1] > distance[2])
+            {
+                setDirection("Up");
+                moveVertical();
+            }
+
+
+            if (distance[0] > distance[3] && distance[1] > distance[3] && distance[2] > distance[3])
+            {
+                setDirection("Down");
+                moveHorizontal();
+            }
 
 
 
         }
+        public void moveGhost()
+        {
+            setDeltaChangeSpeed();
+            if (Math.Floor(deltaChange) == 1)
+            {
+                if (ghostCharacter == 'G')
+                {
+                    moveHorizontal();
+                }
+                else if (ghostCharacter == 'O')
+                {
+                    moveRandom();
+                }
+                else if (ghostCharacter == 'S')
+                {
+                    moveVertical();
+                }
+                else if (ghostCharacter == 'T')
+                {
+                    moveSmart();
+                }
+                setDeltaZero();
+            }
+        }
+
+
+
+
+
+
     }
 
 }
