@@ -43,6 +43,11 @@ namespace Pac_Man_6
                 player.movePacMan();
                 player.drawPacMan();
 
+                if (player.pacmanStop() == true)
+                {
+                    gameRunning = false;
+                }
+
                 foreach (Ghost g in enemies)
                 {
                   
