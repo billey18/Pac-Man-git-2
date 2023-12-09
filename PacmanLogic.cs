@@ -16,7 +16,7 @@ namespace Pac_Man_6
         private int y;
         private int score;
         private Grid mazeGrid;
-      //  private int life = 3;
+        private bool stoppingCondition = false;
 
         public PacMan(int x, int y, Grid mazeGrid)
         {
@@ -70,17 +70,17 @@ namespace Pac_Man_6
 
         public void moveLeftDirection(Ghost g)
         {
-            if (mazeGrid.maze[x, y - 1].getValue() == ' ' || mazeGrid.maze[x, y - 1].getValue() == '.')
+            if (mazeGrid.maze[x, y - 1].getValue() == ' ' || mazeGrid.maze[x, y - 1].getValue() == '.' || mazeGrid.maze[x, y - 1].getValue() == '*')
             {
 
                 leftSide();
-                if (mazeGrid.maze[x, y].getValue() == g.getCharacter())
-                {
-             //       life -= 1;
-                }
-                else if (mazeGrid.maze[x, y].getValue() == '.')
+              if (mazeGrid.maze[x, y].getValue() == '.')
                 {
                     score += 1;
+                }
+              else if(mazeGrid.maze[x, y - 1].getValue() == '*')
+                {
+                    score += 50;
                 }
 
 
@@ -91,17 +91,17 @@ namespace Pac_Man_6
 
         public void moveRightDirection(Ghost g)
         {
-            if (mazeGrid.maze[x, y + 1].getValue() == ' ' || mazeGrid.maze[x, y + 1].getValue() == '.')
+            if (mazeGrid.maze[x, y + 1].getValue() == ' ' || mazeGrid.maze[x, y + 1].getValue() == '.' || mazeGrid.maze[x, y + 1].getValue() == '*')
             {
 
                 rightSide();
-                if (mazeGrid.maze[x, y].getValue() == g.getCharacter())
-                {
-              //      life -= 1;
-                }
-                else if (mazeGrid.maze[x, y].getValue() == '.')
+                 if (mazeGrid.maze[x, y + 1].getValue() == '.')
                 {
                     score += 1;
+                }
+                else if (mazeGrid.maze[x, y + 1].getValue() == '*')
+                {
+                    score += 50;
                 }
 
 
@@ -113,17 +113,18 @@ namespace Pac_Man_6
 
         public void moveUpDirection(Ghost g)
         {
-            if (mazeGrid.maze[x - 1, y].getValue() == ' ' || mazeGrid.maze[x - 1, y].getValue() == '.')
+            if (mazeGrid.maze[x - 1, y].getValue() == ' ' || mazeGrid.maze[x - 1, y].getValue() == '.' || mazeGrid.maze[x - 1, y].getValue() == '*')
             {
 
                 upSide();
-                if (mazeGrid.maze[x, y].getValue() == g.getCharacter())
-                {
-                //    life -= 1;
-                }
-                else if (mazeGrid.maze[x, y].getValue() == '.')
+                if (mazeGrid.maze[x, y].getValue() == '.')
                 {
                     score += 1;
+                }
+
+                else if (mazeGrid.maze[x - 1, y].getValue() == '*')
+                {
+                    score += 50;
                 }
 
 
@@ -134,7 +135,7 @@ namespace Pac_Man_6
 
         public void moveDownDirection(Ghost g)
         {
-            if (mazeGrid.maze[x + 1, y].getValue() == ' ' || mazeGrid.maze[x + 1, y].getValue() == '.')
+            if (mazeGrid.maze[x + 1, y].getValue() == ' ' || mazeGrid.maze[x + 1, y].getValue() == '.' || mazeGrid.maze[x + 1, y].getValue() == '*')
             {
 
                 downSide();
@@ -144,12 +145,11 @@ namespace Pac_Man_6
                 {
                     score += 1;
                 }
-              
-              //  if (mazeGrid.maze[x, y].getValue() != ' ' && mazeGrid.maze[x, y].getValue() != '.')
-              //  {
-                   
-                //    life -= 1;
-              //  }
+
+                else if (mazeGrid.maze[x + 1, y].getValue() == '*')
+                {
+                    score += 50;
+                }
 
             }
 
@@ -159,14 +159,6 @@ namespace Pac_Man_6
 
 
 
-     //   public bool isStoppingCondition()
-      //  {
-      //      if (life == 0)
-        //    {
-           //     return false;
-          //  }
-           // return true;
-       // }
 
         public void printScore()
         {

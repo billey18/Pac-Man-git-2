@@ -87,7 +87,25 @@ namespace Pac_Man_6
             Console.SetCursorPosition(y, x);
             Console.Write(ghostCharacter);
 
-          
+          if ( mazeGrid.maze[x, y].getValue() == 'P')
+                {
+                Console.SetCursorPosition(80, 7);
+                Console.WriteLine("Game Over! You Touched a Ghost.");
+                Console.SetCursorPosition(80, 8);
+                Console.WriteLine("Press Space to Close.");
+
+                while(1 != stopCheck)
+                {
+                    if (Keyboard.IsKeyPressed(Key.Space))
+                    {
+                        stoppingCondition = true;
+                        stopCheck = 1;
+
+                    }
+                }
+
+
+                }
 
 
         }
@@ -146,7 +164,7 @@ namespace Pac_Man_6
         {
             if (ghostDirection == "Left")
             {
-                if (mazeGrid.maze[x, y - 1].getValue() == ' ' || mazeGrid.maze[x, y - 1].getValue() == '.' || mazeGrid.maze[x, y - 1].getValue() == 'P')
+                if (mazeGrid.maze[x, y - 1].getValue() == ' ' || mazeGrid.maze[x, y - 1].getValue() == '.' || mazeGrid.maze[x, y - 1].getValue() == 'P'  || mazeGrid.maze[x, y - 1].getValue() == '*' )
                 {
                     ghostMoveLeft();
                 }
@@ -162,7 +180,7 @@ namespace Pac_Man_6
 
             else if (ghostDirection == "Right")
             {
-                if (mazeGrid.maze[x, y + 1].getValue() == ' ' || mazeGrid.maze[x, y + 1].getValue() == '.' || mazeGrid.maze[x, y + 1].getValue() == 'P')
+                if (mazeGrid.maze[x, y + 1].getValue() == ' ' || mazeGrid.maze[x, y + 1].getValue() == '.' || mazeGrid.maze[x, y + 1].getValue() == 'P' || mazeGrid.maze[x, y + 1].getValue() == '*')
                 {
                     ghostMoveRight();
                 }
@@ -185,7 +203,7 @@ namespace Pac_Man_6
         {
             if (ghostDirection == "Up")
             {
-                if (mazeGrid.maze[x - 1, y].getValue() == ' ' || mazeGrid.maze[x - 1, y].getValue() == '.' || mazeGrid.maze[x - 1, y].getValue() == 'P')
+                if (mazeGrid.maze[x - 1, y].getValue() == ' ' || mazeGrid.maze[x - 1, y].getValue() == '.' || mazeGrid.maze[x - 1, y].getValue() == 'P' || mazeGrid.maze[x - 1, y].getValue() == '*')
                 {
                     ghostMoveUp();
                 }
@@ -198,7 +216,7 @@ namespace Pac_Man_6
 
            else if (ghostDirection == "Down")
             {
-                if (mazeGrid.maze[x + 1, y].getValue() == ' ' || mazeGrid.maze[x + 1, y].getValue() == '.' || mazeGrid.maze[x + 1, y].getValue() == 'P')
+                if (mazeGrid.maze[x + 1, y].getValue() == ' ' || mazeGrid.maze[x + 1, y].getValue() == '.' || mazeGrid.maze[x + 1, y].getValue() == 'P' || mazeGrid.maze[x + 1, y].getValue() == '*')
                 {
                     ghostMoveDown();
                 }
@@ -215,7 +233,7 @@ namespace Pac_Man_6
         public int generateRandom()
         {
             Random rand = new Random();
-            return rand.Next(0, 3);
+            return rand.Next(0, 4);
 
         }
 
@@ -225,7 +243,7 @@ namespace Pac_Man_6
             int random = generateRandom();
             if (random == 0) // left
             {
-                if (mazeGrid.maze[x, y - 1].getValue() == '.' || mazeGrid.maze[x, y - 1].getValue() == ' ' || mazeGrid.maze[x, y - 1].getValue() == 'P')
+                if (mazeGrid.maze[x, y - 1].getValue() == '.' || mazeGrid.maze[x, y - 1].getValue() == ' ' || mazeGrid.maze[x, y - 1].getValue() == 'P' || mazeGrid.maze[x, y - 1].getValue() == '*')
                 {
                     ghostMoveLeft();
                 }
@@ -234,7 +252,7 @@ namespace Pac_Man_6
 
             if (random == 1) // right
             {
-                if (mazeGrid.maze[x, y + 1].getValue() == '.' || mazeGrid.maze[x, y + 1].getValue() == ' ' || mazeGrid.maze[x, y + 1].getValue() == 'P')
+                if (mazeGrid.maze[x, y + 1].getValue() == '.' || mazeGrid.maze[x, y + 1].getValue() == ' ' || mazeGrid.maze[x, y + 1].getValue() == 'P' || mazeGrid.maze[x, y + 1].getValue() == '*')
                 {
                     ghostMoveRight();
                 }
@@ -244,7 +262,7 @@ namespace Pac_Man_6
 
             if (random == 2) // up
             {
-                if (mazeGrid.maze[x - 1, y].getValue() == '.' || mazeGrid.maze[x - 1, y].getValue() == ' ' || mazeGrid.maze[x - 1, y].getValue() == 'P')
+                if (mazeGrid.maze[x - 1, y].getValue() == '.' || mazeGrid.maze[x - 1, y].getValue() == ' ' || mazeGrid.maze[x - 1, y].getValue() == 'P' || mazeGrid.maze[x - 1, y].getValue() == '*')
                 {
                     ghostMoveUp();
                 }
@@ -256,7 +274,7 @@ namespace Pac_Man_6
 
             if (random == 3) // down
             {
-                if (mazeGrid.maze[x + 1, y].getValue() == '.' || mazeGrid.maze[x + 1, y].getValue() == ' ' || mazeGrid.maze[x + 1, y].getValue() == 'P')
+                if (mazeGrid.maze[x + 1, y].getValue() == '.' || mazeGrid.maze[x + 1, y].getValue() == ' ' || mazeGrid.maze[x + 1, y].getValue() == 'P' || mazeGrid.maze[x + 1, y].getValue() == '*')
                 {
                     ghostMoveDown();
                 }
@@ -292,24 +310,24 @@ namespace Pac_Man_6
         {
             Spaces g = new Spaces(ghostCharacter, x, y);
             double[] distance = new double[4] { 1000000, 1000000, 1000000, 1000000 };
-            if (mazeGrid.getLeftSpace(g).getValue() == '.' || mazeGrid.getLeftSpace(g).getValue() == ' ' || mazeGrid.getLeftSpace(g).getValue() == 'P')
+            if (mazeGrid.getLeftSpace(g).getValue() == '.' || mazeGrid.getLeftSpace(g).getValue() == ' ' || mazeGrid.getLeftSpace(g).getValue() == 'P' || mazeGrid.getLeftSpace(g).getValue() == '*')
             {
                 distance[0] = calculateDistance(mazeGrid.getLeftSpace(g), mazeGrid.playerLocation());
             }
 
-            if (mazeGrid.getRightSpace(g).getValue() == '.' || mazeGrid.getRightSpace(g).getValue() == ' ' || mazeGrid.getRightSpace(g).getValue() == 'P')
+            if (mazeGrid.getRightSpace(g).getValue() == '.' || mazeGrid.getRightSpace(g).getValue() == ' ' || mazeGrid.getRightSpace(g).getValue() == 'P' || mazeGrid.getRightSpace(g).getValue() == '*')
             {
                 distance[1] = calculateDistance(mazeGrid.getRightSpace(g), mazeGrid.playerLocation());
             }
 
-            if (mazeGrid.getTopSpace(g).getValue() == '.' || mazeGrid.getTopSpace(g).getValue() == ' ' || mazeGrid.getTopSpace(g).getValue() == 'P')
+            if (mazeGrid.getTopSpace(g).getValue() == '.' || mazeGrid.getTopSpace(g).getValue() == ' ' || mazeGrid.getTopSpace(g).getValue() == 'P' || mazeGrid.getTopSpace(g).getValue() == '*')
             {
                 distance[2] = calculateDistance(mazeGrid.getTopSpace(g), mazeGrid.playerLocation());
             }
 
-            if (mazeGrid.getDownSpace(g).getValue() == '.' || mazeGrid.getDownSpace(g).getValue() == ' ' || mazeGrid.getDownSpace(g).getValue() == 'P')
+            if (mazeGrid.getDownSpace(g).getValue() == '.' || mazeGrid.getDownSpace(g).getValue() == ' ' || mazeGrid.getDownSpace(g).getValue() == 'P' || mazeGrid.getDownSpace(g).getValue() == '*')
             {
-                distance[3] = calculateDistance(mazeGrid.getLeftSpace(g), mazeGrid.playerLocation());
+                distance[3] = calculateDistance(mazeGrid.getDownSpace(g), mazeGrid.playerLocation());
             }
 
             if (distance[1] > distance[0] && distance[3] > distance[0] && distance[2] > distance[0])
@@ -319,7 +337,7 @@ namespace Pac_Man_6
             }
 
 
-            if (distance[0] > distance[1] && distance[3] > distance[1] && distance[2] > distance[1])
+           else if (distance[0] > distance[1] && distance[3] > distance[1] && distance[2] > distance[1])
             {
                 setDirection("Right");
                 moveHorizontal();
@@ -327,14 +345,14 @@ namespace Pac_Man_6
 
 
 
-            if (distance[0] > distance[2] && distance[3] > distance[2] && distance[1] > distance[2])
+          else  if (distance[0] > distance[2] && distance[3] > distance[2] && distance[1] > distance[2])
             {
                 setDirection("Up");
                 moveVertical();
             }
 
 
-            if (distance[0] > distance[3] && distance[1] > distance[3] && distance[2] > distance[3])
+          else  if (distance[0] > distance[3] && distance[1] > distance[3] && distance[2] > distance[3])
             {
                 setDirection("Down");
                 moveVertical();
