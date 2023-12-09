@@ -39,14 +39,15 @@ namespace Pac_Man_6
           public bool isStoppingCondition()
           {
               if (stoppingCondition == false)
-           {
+             {
            return false;
           }
          return true;
          }
 
 
-        public Ghost() { }
+        public Ghost() 
+        { }
 
         public string getDirection()
         {
@@ -86,27 +87,14 @@ namespace Pac_Man_6
             Console.SetCursorPosition(y, x);
             Console.Write(ghostCharacter);
 
-            if (mazeGrid.maze[x, y].getValue() == 'P')
-            {
-                Console.SetCursorPosition(80, 7);
-                Console.WriteLine("Game Over! You Touched a Ghost.");
-                Console.SetCursorPosition(80, 8);
-                Console.WriteLine("Press Space to Close.");
-
-                while (1 != stopCheck)
-                {
-                    if (Keyboard.IsKeyPressed(Key.Space))
-                    {
-                        stoppingCondition = true;
-                        stopCheck = 1;
-                    }
-
-                }
-
-            }
+          
 
 
-            }
+        }
+
+
+
+
 
 
         void setDeltaChangeSpeed()
@@ -208,7 +196,7 @@ namespace Pac_Man_6
                 }
             }
 
-            if (ghostDirection == "Down")
+           else if (ghostDirection == "Down")
             {
                 if (mazeGrid.maze[x + 1, y].getValue() == ' ' || mazeGrid.maze[x + 1, y].getValue() == '.' || mazeGrid.maze[x + 1, y].getValue() == 'P')
                 {
@@ -220,12 +208,6 @@ namespace Pac_Man_6
                     ghostDirection = "Up";
                 }
             }
-
-
-
-
-
-
 
 
         }
@@ -330,6 +312,12 @@ namespace Pac_Man_6
                 distance[3] = calculateDistance(mazeGrid.getLeftSpace(g), mazeGrid.playerLocation());
             }
 
+            if (distance[1] > distance[0] && distance[3] > distance[0] && distance[2] > distance[0])
+            {
+                setDirection("Left");
+                moveHorizontal();
+            }
+
 
             if (distance[0] > distance[1] && distance[3] > distance[1] && distance[2] > distance[1])
             {
@@ -337,11 +325,7 @@ namespace Pac_Man_6
                 moveHorizontal();
             }
 
-            if (distance[1] > distance[0] && distance[3] > distance[0] && distance[2] > distance[0])
-            {
-                setDirection("Left");
-                moveHorizontal();
-            }
+
 
             if (distance[0] > distance[2] && distance[3] > distance[2] && distance[1] > distance[2])
             {
@@ -353,26 +337,10 @@ namespace Pac_Man_6
             if (distance[0] > distance[3] && distance[1] > distance[3] && distance[2] > distance[3])
             {
                 setDirection("Down");
-                moveHorizontal();
+                moveVertical();
             }
 
-            if (distance[0] == 0 || distance[1] == 0 || distance[2] == 0 || distance[3] == 0)
-            {
-                Console.SetCursorPosition(80, 7);
-                Console.WriteLine("Game Over! You Touched a Ghost.");
-                Console.SetCursorPosition(80, 8);
-                Console.WriteLine("Press Space to Close.");
-
-                while (1 != stopCheck)
-                {
-                    if (Keyboard.IsKeyPressed(Key.Space))
-                    {
-                        stoppingCondition = true;
-                        stopCheck = 1;
-                    }
-
-                }
-            }
+           
 
 
         }

@@ -37,17 +37,17 @@ namespace Pac_Man_6
 
                 foreach (Ghost g in enemies)
                 {
-                    if (g.isStoppingCondition() == true)
-                    {
-                        gameRunning = false;
-                    }
+                  
 
 
                     g.removeGhost();
                     g.moveGhost();
                     g.drawGhost();
+                    if (g.isStoppingCondition() == true)
+                    {
+                        gameRunning = false;
+                    }
 
-                    
 
                 }
 
