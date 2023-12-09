@@ -17,7 +17,7 @@ namespace Pac_Man_6
             string pathMaze = "maze.txt";
             Grid mazeGrid = new Grid(24, 71, pathMaze);
             PacMan player = new PacMan(9, 32, mazeGrid);
-            Ghost g1 = new Ghost(16, 39, 'G', "Left", 0.1F, ' ', mazeGrid);
+            Ghost g1 = new Ghost(16, 39, 'T', "Up", 0.5F, ' ', mazeGrid);
             List<Ghost> enemies = new List<Ghost>();
             enemies.Add(g1);
 
@@ -37,17 +37,24 @@ namespace Pac_Man_6
 
                 foreach (Ghost g in enemies)
                 {
+                    if (g.isStoppingCondition() == true)
+                    {
+                        gameRunning = false;
+                    }
+
+
                     g.removeGhost();
                     g.moveGhost();
                     g.drawGhost();
 
+                    
+
                 }
 
-                if (player.isStoppingCondition() == false)
-                {
-                    gameRunning = false;
-                }
+                
             }
+
+         
 
             Console.ReadKey();
         }

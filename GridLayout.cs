@@ -99,7 +99,7 @@ namespace Pac_Man_6
 
             }
 
-            return null;
+            return maze[0, 0];
         }
 
 
@@ -115,7 +115,7 @@ namespace Pac_Man_6
                     }
                 }
             }
-            return null;
+            return maze[0, 0];
 
         }
 

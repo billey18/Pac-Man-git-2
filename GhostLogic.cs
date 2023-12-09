@@ -1,6 +1,8 @@
-﻿using System;
+﻿using EZInput;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,12 +16,14 @@ namespace Pac_Man_6
     {
         private int x;
         private int y;
+        private int stopCheck = 0;
         private char ghostCharacter;
         private string ghostDirection;
         private float ghostSpeed;
         private char previousItem;
         private Grid mazeGrid;
         private float deltaChange;
+        private bool stoppingCondition = false;
 
         public Ghost(int x, int y, char ghostCharacter, string ghostDirection, float ghostSpeed, char previousItem, Grid mazeGrid)
         {
@@ -31,6 +35,16 @@ namespace Pac_Man_6
             this.previousItem = previousItem;
             this.mazeGrid = mazeGrid;
         }
+
+          public bool isStoppingCondition()
+          {
+              if (stoppingCondition == false)
+           {
+           return false;
+          }
+         return true;
+         }
+
 
         public Ghost() { }
 
@@ -72,8 +86,27 @@ namespace Pac_Man_6
             Console.SetCursorPosition(y, x);
             Console.Write(ghostCharacter);
 
+            if (mazeGrid.maze[x, y].getValue() == 'P')
+            {
+                Console.SetCursorPosition(80, 7);
+                Console.WriteLine("Game Over! You Touched a Ghost.");
+                Console.SetCursorPosition(80, 8);
+                Console.WriteLine("Press Space to Close.");
 
-        }
+                while (1 != stopCheck)
+                {
+                    if (Keyboard.IsKeyPressed(Key.Space))
+                    {
+                        stoppingCondition = true;
+                        stopCheck = 1;
+                    }
+
+                }
+
+            }
+
+
+            }
 
 
         void setDeltaChangeSpeed()
@@ -263,7 +296,12 @@ namespace Pac_Man_6
 
         public double calculateDistance(Spaces current, Spaces pacmanLocation)
         {
+           
+           
+
             double distance = Math.Sqrt((Math.Pow(pacmanLocation.getX() - current.getX(), 2) + (Math.Pow(pacmanLocation.getY() - current.getY(), 2))));
+
+
             return distance;
         }
 
@@ -318,6 +356,23 @@ namespace Pac_Man_6
                 moveHorizontal();
             }
 
+            if (distance[0] == 0 || distance[1] == 0 || distance[2] == 0 || distance[3] == 0)
+            {
+                Console.SetCursorPosition(80, 7);
+                Console.WriteLine("Game Over! You Touched a Ghost.");
+                Console.SetCursorPosition(80, 8);
+                Console.WriteLine("Press Space to Close.");
+
+                while (1 != stopCheck)
+                {
+                    if (Keyboard.IsKeyPressed(Key.Space))
+                    {
+                        stoppingCondition = true;
+                        stopCheck = 1;
+                    }
+
+                }
+            }
 
 
         }

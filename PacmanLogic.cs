@@ -16,7 +16,7 @@ namespace Pac_Man_6
         private int y;
         private int score;
         private Grid mazeGrid;
-        private int life = 3;
+      //  private int life = 3;
 
         public PacMan(int x, int y, Grid mazeGrid)
         {
@@ -76,7 +76,7 @@ namespace Pac_Man_6
                 leftSide();
                 if (mazeGrid.maze[x, y].getValue() == g.getCharacter())
                 {
-                    life -= 1;
+             //       life -= 1;
                 }
                 else if (mazeGrid.maze[x, y].getValue() == '.')
                 {
@@ -97,7 +97,7 @@ namespace Pac_Man_6
                 rightSide();
                 if (mazeGrid.maze[x, y].getValue() == g.getCharacter())
                 {
-                    life -= 1;
+              //      life -= 1;
                 }
                 else if (mazeGrid.maze[x, y].getValue() == '.')
                 {
@@ -119,7 +119,7 @@ namespace Pac_Man_6
                 upSide();
                 if (mazeGrid.maze[x, y].getValue() == g.getCharacter())
                 {
-                    life -= 1;
+                //    life -= 1;
                 }
                 else if (mazeGrid.maze[x, y].getValue() == '.')
                 {
@@ -159,21 +159,21 @@ namespace Pac_Man_6
 
 
 
-        public bool isStoppingCondition()
-        {
-            if (life == 0)
-            {
-                return false;
-            }
-            return true;
-        }
+     //   public bool isStoppingCondition()
+      //  {
+      //      if (life == 0)
+        //    {
+           //     return false;
+          //  }
+           // return true;
+       // }
 
         public void printScore()
         {
             Console.SetCursorPosition(80, 5);
             Console.WriteLine("Score : {0}", score);
             Console.SetCursorPosition(80, 6);
-            Console.WriteLine("Lives: {0}", life);
+         //   Console.WriteLine("Lives: {0}", life);
 
             if (score > 464)
             {
