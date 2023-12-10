@@ -75,11 +75,11 @@ namespace Pac_Man_6
             {
 
                 leftSide();
-              if (mazeGrid.maze[x, y - 1].getValue() == '.')
+              if (mazeGrid.maze[x, y].getValue() == '.')
                 {
                     score += 1;
                 }
-              else if(mazeGrid.maze[x, y - 1].getValue() == '*')
+              else if(mazeGrid.maze[x, y].getValue() == '*')
                 {
                     score += 50;
                 }
@@ -96,11 +96,11 @@ namespace Pac_Man_6
             {
 
                 rightSide();
-                 if (mazeGrid.maze[x, y + 1].getValue() == '.')
+                 if (mazeGrid.maze[x, y].getValue() == '.')
                 {
                     score += 1;
                 }
-                else if (mazeGrid.maze[x, y + 1].getValue() == '*')
+                else if (mazeGrid.maze[x, y].getValue() == '*')
                 {
                     score += 50;
                 }
@@ -123,7 +123,7 @@ namespace Pac_Man_6
                     score += 1;
                 }
 
-                else if (mazeGrid.maze[x - 1, y].getValue() == '*')
+                else if (mazeGrid.maze[x, y].getValue() == '*')
                 {
                     score += 50;
                 }
@@ -147,7 +147,7 @@ namespace Pac_Man_6
                     score += 1;
                 }
 
-                else if (mazeGrid.maze[x + 1, y].getValue() == '*')
+                else if (mazeGrid.maze[x, y].getValue() == '*')
                 {
                     score += 50;
                 }
